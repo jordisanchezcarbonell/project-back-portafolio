@@ -1,9 +1,8 @@
-﻿
-\# Task Tracker API
+﻿# Task Tracker API
 
 Task Tracker API es una aplicación simple de gestión de tareas construida con Node.js y Express. Esta API RESTful permite a los usuarios crear, leer, actualizar y eliminar tareas, así como marcar tareas como en progreso o completadas.
 
-\## Características
+## Características
 
 - Añadir nuevas tareas.
 - Listar todas las tareas o filtrar por estado (`todo`, `in-progress`, `done`).
@@ -12,281 +11,202 @@ Task Tracker API es una aplicación simple de gestión de tareas construida con 
 - Marcar tareas como en progreso.
 - Marcar tareas como completadas.
 
-\## Tecnologías
+## Tecnologías
 
 - Node.js
 - Express
 - JSON para el almacenamiento de datos
 
-\## Requisitos Previos
+## Requisitos Previos
 
 - Node.js (v12 o superior)
 - npm (v6 o superior)
 
-\## Instalación
+## Instalación
 
-1. \*\*Clonar el repositorio:\*\*
+1. **Clonar el repositorio:**
 
-\```bash
+   ```bash
+   git clone https://github.com/tuusuario/task-tracker-api.git
+   cd task-tracker-api
+   ```
 
-git clone https://github.com/tuusuario/task-tracker-api.git
+2. **Instalar las dependencias:**
 
-cd task-tracker-api
+   ```bash
+   npm install
+   ```
 
-\```
+3. **Iniciar el servidor:**
 
-1. \*\*Instalar las dependencias:\*\*
+   ```bash
+   npm start
+   ```
 
-\```bash
+   El servidor se ejecutará en `http://localhost:3000`.
 
-npm install
+## Uso
 
-\```
+### Añadir una nueva tarea
 
-1. \*\*Iniciar el servidor:\*\*
+**Endpoint:** `POST /tasks`
 
-\```bash
-
-npm start
-
-\```
-
-El servidor se ejecutará en `http://localhost:3000`.
-
-\## Uso
-
-\### Añadir una nueva tarea
-
-\*\*Endpoint:\*\* `POST /tasks`
-
-\```bash
-
+```bash
 curl -X POST http://localhost:3000/tasks -H "Content-Type: application/json" -d '{"description": "Comprar comestibles"}'
+```
 
-\```
+**Respuesta:**
 
-\*\*Respuesta:\*\*
-
-\```json
-
+```json
 {
-
-"message": "Tarea añadida exitosamente",
-
-"task": {
-
-"id": 1,
-
-"description": "Comprar comestibles",
-
-"status": "todo",
-
-"createdAt": "2024-08-09T12:34:56.789Z",
-
-"updatedAt": "2024-08-09T12:34:56.789Z"
-
+  "message": "Tarea añadida exitosamente",
+  "task": {
+    "id": 1,
+    "description": "Comprar comestibles",
+    "status": "todo",
+    "createdAt": "2024-08-09T12:34:56.789Z",
+    "updatedAt": "2024-08-09T12:34:56.789Z"
+  }
 }
+```
 
-}
+### Listar todas las tareas
 
-\```
+**Endpoint:** `GET /tasks`
 
-\### Listar todas las tareas
-
-\*\*Endpoint:\*\* `GET /tasks`
-
-\```bash
-
+```bash
 curl http://localhost:3000/tasks
+```
 
-\```
+**Respuesta:**
 
-\*\*Respuesta:\*\*
-
-\```json
-
+```json
 [
-
-{
-
-"id": 1,
-
-"description": "Comprar comestibles",
-
-"status": "todo",
-
-"createdAt": "2024-08-09T12:34:56.789Z",
-
-"updatedAt": "2024-08-09T12:34:56.789Z"
-
-}
-
+  {
+    "id": 1,
+    "description": "Comprar comestibles",
+    "status": "todo",
+    "createdAt": "2024-08-09T12:34:56.789Z",
+    "updatedAt": "2024-08-09T12:34:56.789Z"
+  }
 ]
+```
 
-\```
+### Actualizar una tarea
 
-\### Actualizar una tarea
+**Endpoint:** `PUT /tasks/:id`
 
-\*\*Endpoint:\*\* `PUT /tasks/:id`
-
-\```bash
-
+```bash
 curl -X PUT http://localhost:3000/tasks/1 -H "Content-Type: application/json" -d '{"description": "Comprar comestibles y cocinar la cena"}'
+```
 
-\```
+**Respuesta:**
 
-\*\*Respuesta:\*\*
-
-\```json
-
+```json
 {
-
-"message": "Tarea 1 actualizada exitosamente"
-
+  "message": "Tarea 1 actualizada exitosamente"
 }
+```
 
-\```
+### Eliminar una tarea
 
-\### Eliminar una tarea
+**Endpoint:** `DELETE /tasks/:id`
 
-\*\*Endpoint:\*\* `DELETE /tasks/:id`
-
-\```bash
-
+```bash
 curl -X DELETE http://localhost:3000/tasks/1
+```
 
-\```
+**Respuesta:**
 
-\*\*Respuesta:\*\*
-
-\```json
-
+```json
 {
-
-"message": "Tarea 1 eliminada exitosamente"
-
+  "message": "Tarea 1 eliminada exitosamente"
 }
+```
 
-\```
+### Marcar una tarea como en progreso
 
-\### Marcar una tarea como en progreso
+**Endpoint:** `PATCH /tasks/:id/in-progress`
 
-\*\*Endpoint:\*\* `PATCH /tasks/:id/in-progress`
-
-\```bash
-
+```bash
 curl -X PATCH http://localhost:3000/tasks/1/in-progress
+```
 
-\```
+**Respuesta:**
 
-\*\*Respuesta:\*\*
-
-\```json
-
+```json
 {
-
-"message": "Tarea 1 marcada como en progreso"
-
+  "message": "Tarea 1 marcada como en progreso"
 }
+```
 
-\```
+### Marcar una tarea como completada
 
-\### Marcar una tarea como completada
+**Endpoint:** `PATCH /tasks/:id/done`
 
-\*\*Endpoint:\*\* `PATCH /tasks/:id/done`
-
-\```bash
-
+```bash
 curl -X PATCH http://localhost:3000/tasks/1/done
+```
 
-\```
+**Respuesta:**
 
-\*\*Respuesta:\*\*
-
-\```json
-
+```json
 {
-
-"message": "Tarea 1 marcada como completada"
-
+  "message": "Tarea 1 marcada como completada"
 }
+```
 
-\```
-
-\### Listar tareas por estado
+### Listar tareas por estado
 
 Puedes filtrar las tareas según su estado (`todo`, `in-progress`, `done`).
 
-\*\*Endpoint:\*\* `GET /tasks?status={status}`
+**Endpoint:** `GET /tasks?status={status}`
 
-\```bash
-
+```bash
 curl http://localhost:3000/tasks?status=in-progress
+```
 
-\```
+**Respuesta:**
 
-\*\*Respuesta:\*\*
-
-\```json
-
+```json
 [
-
-{
-
-"id": 1,
-
-"description": "Comprar comestibles y cocinar la cena",
-
-"status": "in-progress",
-
-"createdAt": "2024-08-09T12:34:56.789Z",
-
-"updatedAt": "2024-08-09T12:45:00.123Z"
-
-}
-
+  {
+    "id": 1,
+    "description": "Comprar comestibles y cocinar la cena",
+    "status": "in-progress",
+    "createdAt": "2024-08-09T12:34:56.789Z",
+    "updatedAt": "2024-08-09T12:45:00.123Z"
+  }
 ]
+```
 
-\```
-
-\## Estructura del Proyecto
+## Estructura del Proyecto
 
 El proyecto tiene una estructura simple:
 
-\```
-
+```
 task-tracker-api/
-
 │
-
 ├── index.js        # Archivo principal del servidor
-
 ├── tasks.json      # Archivo JSON que almacena las tareas
-
 ├── package.json    # Archivo de configuración de npm
-
 └── README.md       # Documentación del proyecto
+```
 
-\```
-
-\## Contribuir
+## Contribuir
 
 Las contribuciones son bienvenidas. Si deseas contribuir:
 
 1. Haz un fork del proyecto.
-1. Crea una nueva rama (`git checkout -b feature/nueva-funcionalidad`).
-1. Realiza los cambios necesarios y haz commit (`git commit -m 'Añadir nueva funcionalidad'`).
-1. Haz push a la rama (`git push origin feature/nueva-funcionalidad`).
-1. Abre un Pull Request.
+2. Crea una nueva rama (`git checkout -b feature/nueva-funcionalidad`).
+3. Realiza los cambios necesarios y haz commit (`git commit -m 'Añadir nueva funcionalidad'`).
+4. Haz push a la rama (`git push origin feature/nueva-funcionalidad`).
+5. Abre un Pull Request.
 
-\## Licencia
+## Licencia
 
 Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para obtener más detalles.
 
-\## Contacto
-
-Si tienes alguna pregunta, comentario o sugerencia, no dudes en contactarme a través de [tuemail@example.com](mailto:tuemail@example.com).
-
-\---
+## Contacto
 
 ¡Gracias por utilizar Task Tracker API! Espero que te sea de utilidad para gestionar tus tareas.
